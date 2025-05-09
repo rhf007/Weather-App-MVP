@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <title>Weather</title>
+</head>
+<body>
+    <div class="bigbox">
+        <!-- LESSON: DIVs won't appear(their background colors at least)
+            unless there is literally something inside the <div> tag-->
+                <div id="search-div" class="main-content">
+                    <form>
+                        <div class="search">
+                            <input id="search-bar" class="search-input" type="search" placeholder="Search for a city">
+                        </div>
+                    </form>
+                    
+                    <div class="inside-search-center">
+                        <img id="weather-image" src="../static/images/glass weather icons/Day/sunny.png">
+                    </div>
+                    
+                    <div class="inside-search-left">
+                        <p id="degree">12°C</p>
+                    </div>
+                    
+                    <div class="inside-search-left">
+                        <p id="day-time">Monday, 16:00</p>
+                    </div>
+                    
+                    <!-- <div class="inside-search-left little-info">
+                        <img class="small-weather-images" src="../static/images/3d solid weather icons/mcloudy.png">
+                        <p>Mostly Cloudy</p>
+                    </div>
+                    
+                    <div class="inside-search-left little-info">
+                        <img class="small-weather-images" src="../static/images/3d solid weather icons/Lrain.png">
+                        <p>Rain - 30%</p>
+                    </div> -->
+                    
+                    <!-- <div id="city-img-div" class="inside-search-center">
+                        <!-- <img src="../static/images/istockphoto-1406960186-612x612.jpg">
+                            <div class="text-overlay">
+                                <p id="text-overlay">New York, NY, USA</p>
+                            </div>
+                        </div> -->
+                        <div id="city-img-div" class="inside-search-center">
+                            {% if random_photo %}
+                            <div class="random-photo-overlay">
+                                <img src="{{ random_photo }}" alt="Random Photo">
+                            </div>
+                            {% endif %}
+                            
+                            <!-- Existing text overlay for the city -->
+                            <div class="text-overlay">
+                                <p id="text-overlay">New York, NY, USA</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="weather" class="main-content">
+                        <nav class="navbar">
+                            <div class="navbar-divs">
+                                <a href="#" class="today-week active" id="today">Today</a>
+                                <a href="#" class="today-week" id="week">Week</a>
+                            </div>
+                            
+                            <div class="navbar-divs">
+                                <a id="cel" href="#" class="cel-feh active">°C</a>
+                                <a id="feh" href="#" class="cel-feh">°F</a>
+                            </div>
+                            
+                        </nav>
+                        
+                        <div class="weather">
+                            <div class="weather-cards">
+                                <p class="card-day">Sun</p>
+                                <img class="card-img" src="../static/images/3d solid weather icons/Tshower.png">
+                                <p class="card-weather">15°-7°</p>
+                            </div>
+                            
+                            <div class="weather-cards">
+                                <p class="card-day">Sun</p>
+                                <img class="card-img" src="../static/images/3d solid weather icons/Tshower.png">
+                                <p class="card-weather">15°-7°</p>
+                            </div>
+                            
+                            <div class="weather-cards">
+                                <p class="card-day">Sun</p>
+                                <img class="card-img" src="../static/images/3d solid weather icons/Tshower.png">
+                                <p class="card-weather">15°-7°</p>
+                            </div>
+                            
+                            <div class="weather-cards">
+                                <p class="card-day">Sun</p>
+                                <img class="card-img" src="../static/images/3d solid weather icons/Tshower.png">
+                                <p class="card-weather">15°-7°</p>
+                            </div>
+                            
+                            <div class="weather-cards">
+                                <p class="card-day">Sun</p>
+                                <img class="card-img" src="../static/images/3d solid weather icons/Tshower.png">
+                                <p class="card-weather">15°-7°</p>
+                            </div>
+                            
+                            <div class="weather-cards">
+                                <p class="card-day">Sun</p>
+                                <img class="card-img" src="../static/images/3d solid weather icons/Tshower.png">
+                                <p class="card-weather">15°-7°</p>
+                            </div>
+                            
+                            <div class="weather-cards">
+                                <p class="card-day">Sun</p>
+                                <img class="card-img" src="../static/images/3d solid weather icons/Tshower.png">
+                                <p class="card-weather">15°-7°</p>
+                            </div>
+                        </div>
+                        
+                        <p class="todays-highlights">Today's Highlights</p>
+                        
+                        <div class="highlights">
+                            <div class="highlight-cards">
+                                <p class="highlight-name">UV Index</p>
+                                <p class="highlight-value"> 7.70 km/h</p>
+                            </div>
+                            
+                            <div class="highlight-cards">
+                                <p class="highlight-name">UV Index</p>
+                                <p class="highlight-value"> 7.70 km/h</p>
+                            </div>
+                            
+                            <div class="highlight-cards">
+                                <p class="highlight-name">UV Index</p>
+                                <p class="highlight-value"> 7.70 km/h</p>
+                            </div>
+                            
+                            <div class="highlight-cards">
+                                <p class="highlight-name">UV Index</p>
+                                <p class="highlight-value"> 7.70 km/h</p>
+                            </div>
+                            
+                            <div class="highlight-cards">
+                                <p class="highlight-name">UV Index</p>
+                                <p class="highlight-value"> 7.70 km/h</p>
+                            </div>
+                            
+                            <div class="highlight-cards">
+                                <p class="highlight-name">UV Index</p>
+                                <p class="highlight-value"> 7.70 km/h</p>
+                            </div>
+                            
+                            <div class="highlight-cards">
+                                <p id="smaller-highlight-name" class="highlight-name">UV Index</p>
+                                <p class="highlight-value"> 7.70 km/h</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script src="./scripts/body.js"></script>
+            </body>
+            </html>
