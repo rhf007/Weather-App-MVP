@@ -1,0 +1,316 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+/*LESSON: for percentage heights to work properly, the parent 
+elements must also have a defined height.*/
+
+html, body {
+    height: 100%;
+}
+
+.bigbox {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+#search-div {
+    background-color: #fff;
+    width: 25%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+
+.search {
+    /*width of conatiner is determined by the content within it*/
+    width: max-content;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 28px;
+    background: #f6f6f6;
+    transition: box-shadow 0.25s;
+}
+
+/*when something inside .search gets focused*/
+.search:focus-within {
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.75);
+}
+
+.search-input {
+    font-size: 16px;
+    color: #333;
+    margin-left: 14px;
+    outline: none;
+    border: none;
+    background: transparent;
+}
+
+.search-input::placeholder,
+.search-icon {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+#weather {
+    background-color: #fffaeb;
+    width: 75%;
+    height: 100%;
+    padding: 0 16px;
+}
+
+
+.inside-search-center, .inside-search-left p {
+    display: inline;
+}
+
+.inside-search-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*for left alignment*/
+.inside-search-left{
+    margin-right: auto;
+}
+
+#weather-image {
+    width: 80%;
+}
+
+#degree {
+    font-size: 48px;
+}
+
+#day-time {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.small-weather-images {
+    width: 10%;
+}
+
+.little-info {
+    display: flex;
+}
+
+.little-info p {
+    margin-left: 4px;
+}
+
+#city-img-div {
+    width: 70%;
+    /* Set a maximum width if needed */
+    max-width: 300px;
+    /* Set a fixed height for the div */
+    height: 100px;
+    /* Hide overflow if the image is larger than the div */
+    overflow: hidden;
+    /* Make the container position-relative */
+    position: relative;
+    border: none;
+    border-radius: 16px;
+    margin-bottom: 24px;
+}
+
+#city-img-div img {
+    width: 100%;
+    height: 100%;
+    /* Ensure the image covers the div */
+    object-fit: cover; 
+    /* Center the image within the div */
+    object-position: center;
+}
+
+.text-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: white;
+    /* Ensure text appears on top of the image */
+    z-index: 2;
+}
+
+.text-overlay p {
+    margin: 0;
+    padding: 10px;
+    color: #000;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    /* Add padding for spacing */
+    padding: 8px;
+}
+
+.today-week {
+    margin-left: 16px;
+    color: #c7c5c8;
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s ease-in-out;
+}
+
+.today-week:hover {
+    color: black;
+}
+
+/* Add the line for hover effect */
+.today-week::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    /* Adjust the position of the line */
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background-color: #000; 
+    transform-origin: bottom right;
+    /* Initially set to 0 width */
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+.today-week:hover::after {
+    transform-origin: bottom left;
+    /* Expand the line on hover */
+    transform: scaleX(1);
+}
+
+.today-week.active {
+    color: black; /* Change color for active link */
+}
+
+.today-week.active::after {
+    transform-origin: bottom left;
+    transform: scaleX(1); /* Expand the line for active link */
+}
+
+.cel-feh {
+    margin-right: 16px;
+    background-color: #fff;
+    position: relative;
+    /*to apply width and height */
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    /* Create a perfect circle using border-radius */
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    color: #000;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cel-feh:hover {
+    background-color: black;
+    color: white;
+}
+
+.cel-feh.active {
+    background-color: black;
+    color: white;
+    /* Add any additional styles for the active state */
+}
+
+.weather {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 100%;
+    margin: 24px 0;
+}
+
+.weather-cards {
+    background-color: #fff;
+    display:flex;
+    border: none;
+    border-radius: 24px;
+    width: 10%;
+    height: 130px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-day {
+    font-weight: 500;
+}
+
+.card-img {
+    width: 40px;
+}
+
+.navbar-divs {
+    display: flex;
+}
+
+.todays-highlights {
+    margin-bottom: 16px;
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.highlights {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 0 auto;
+}
+
+.highlight-cards {
+    background-color: #fff;
+    width: 200px;
+    height: 140px;
+    margin: 16px;
+    display: flex;
+    /* justify-content: space-evenly; */
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 16px;
+}
+
+.highlight-name {
+    color: #6e6e6e;
+    font-weight: 500;
+    margin-top: 8px;
+    font-size: 20px;
+}
+
+.highlight-value {
+    margin-top: 24px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#smaller-highlight-name {
+    font-size: 13px;
+}
