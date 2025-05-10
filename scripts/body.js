@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     //today/week nav links
     let navLinks = document.querySelectorAll(".today-week");
+    let isWeekView = false;
     
     //for each today/week nav link
     navLinks.forEach((link) => {
@@ -13,6 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
             
             //then add active class to the clicked link
             link.classList.add("active");
+            isWeekView = (link.id === "week");
+            if(weatherData){
+                update_weather_div(weatherData);
+            }
         });
     });
     
@@ -22,58 +27,32 @@ document.addEventListener("DOMContentLoaded", () => {
     let degreeElement = document.getElementById("degree");
     // Track whether the temperature is converted
     let isConverted = false;
+    let weatherData = null; // Store the weather data globally
     
     celFehLinks.forEach((link) => {
         link.addEventListener("click", function (event) {
             event.preventDefault();
             
             // Toggle active classes
-            document.getElementById("cel").classList.remove("active");
-            document.getElementById("feh").classList.remove("active");
+            celFehLinks.forEach((item) => item.classList.remove("active"));
             link.classList.add("active");
             
-            // Convert to Fahrenheit
-            if (link.id === "feh" && !isConverted) {
-                const cardWeathers = document.querySelectorAll(".card-weather");
-                const updatedTemps = [];
+            //only convert if we have weather data
+            if(weatherData){
+                const currentTemp = weatherData.current.apparent_temperature;
                 
-                cardWeathers.forEach((el) => {
-                    const c = parseFloat(el.textContent);
-                    const f = (c * 9) / 5 + 32;
-                    updatedTemps.push(`${f.toFixed(1)}°F`);
-                });
+                if (link.id === "feh") {
+                    isConverted = true;
+                    const fahrenheit = (currentTemp * 9) / 5 + 32;
+                    degreeElement.innerHTML = `${fahrenheit.toFixed(1)}°F`;
+                } else {
+                    isConverted = false;
+                    degreeElement.innerHTML = `${currentTemp.toFixed(1)}°C`;
+                }
                 
-                const bigC = parseFloat(degreeElement.textContent);
-                const bigF = (bigC * 9) / 5 + 32;
-                
-                cardWeathers.forEach((el, i) => {
-                    el.textContent = updatedTemps[i];
-                });
-                degreeElement.textContent = `${bigF.toFixed(1)}°F`;
-                
-                isConverted = true;
+                update_weather_div(weatherData);
             }
-            // Convert to Celsius
-            else if (link.id === "cel" && isConverted) {
-                const cardWeathers = document.querySelectorAll(".card-weather");
-                const updatedTemps = [];
-                
-                cardWeathers.forEach((el) => {
-                    const f = parseFloat(el.textContent);
-                    const c = ((f - 32) * 5) / 9;
-                    updatedTemps.push(`${c.toFixed(1)}°C`);
-                });
-                
-                const bigF = parseFloat(degreeElement.textContent);
-                const bigC = ((bigF - 32) * 5) / 9;
-                
-                cardWeathers.forEach((el, i) => {
-                    el.textContent = updatedTemps[i];
-                });
-                degreeElement.textContent = `${bigC.toFixed(1)}°C`;
-                
-                isConverted = false;
-            }
+            
         });
     });
     
@@ -118,15 +97,13 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((response) => response.json())
         .then((data) => {
             // print the json
-            console.log(data);
+            weatherData = data;
             
             // get the location info with the geoAPI after getting weather data
             fetch(geoapiurl)
             //get that json too
             .then((response) => response.json())
             .then((locationData) => {
-                // print the location json
-                console.log(locationData);
                 // Update the search-div(left side) based on weather data
                 updateSearchDiv(data, locationData);
                 
@@ -161,8 +138,8 @@ document.addEventListener("DOMContentLoaded", () => {
         //get date and time
         let today = new Date();
         let day = today.toLocaleDateString("en-GB", { weekday: "long" });
-        let hours = today.getHours();
-        let minutes = today.getMinutes();
+        let hours = today.getHours().toString().padStart(2, '0');
+        let minutes = today.getMinutes().toString().padStart(2, '0');
         
         //change weather image based on current weather status(weather code) and day/night(is_day)
         weather_img.src = update_weather_img(
@@ -170,23 +147,33 @@ document.addEventListener("DOMContentLoaded", () => {
             weather_data.current.is_day
         );
         
-        // change big degree
-        deg.innerHTML = `${weather_data.current.apparent_temperature}°C`;
+        // Set temperature according to active unit immediately
+        updateMainTemperature(weather_data.current.apparent_temperature);
         
-        
-        //display current date and time
         daytime.innerHTML = `${day}, ${hours}:${minutes}`;
         
         //update the time every minute
         setInterval(() => {
-            let today = new Date();
-            let day = today.toLocaleDateString("en-GB", { weekday: "long" });
-            let hours = today.getHours();
-            let minutes = today.getMinutes();
-            daytime.innerHTML = `${day}, ${hours}:${minutes}`;
+            let now = new Date();
+            let currentDay = now.toLocaleDateString("en-GB", { weekday: "long" });
+            let currentHours = now.getHours().toString().padStart(2, '0');
+            let currentMinutes = now.getMinutes().toString().padStart(2, '0');
+            daytime.innerHTML = `${currentDay}, ${currentHours}:${currentMinutes}`;
         }, 1000);
         
         
+    }
+
+    // Dedicated function to update the main temperature display
+    function updateMainTemperature(temperature) {
+        let deg = document.getElementById("degree");
+        
+        if (isConverted) {
+            const fahrenheit = (temperature * 9) / 5 + 32;
+            deg.innerHTML = `${fahrenheit.toFixed(1)}°F`;
+        } else {
+            deg.innerHTML = `${temperature.toFixed(1)}°C`;
+        }
     }
     
     // update the search bar with the detected city and country info
@@ -282,12 +269,11 @@ document.addEventListener("DOMContentLoaded", () => {
         let card_imgs = document.querySelectorAll(".card-img");
         //card weathers
         let card_weathers = document.querySelectorAll(".card-weather");
-        //the today nav link
-        let today = document.getElementById("today");
         //name of highlight in today's highlights
         let highlights_names = document.querySelectorAll(".highlight-name");
         //name of highlight in today's highlights
         let highlights_values = document.querySelectorAll(".highlight-value");
+        
         //sunrise time today
         let sunrise = data.daily.sunrise[0].slice(-5);
         //sunset time today
@@ -308,10 +294,6 @@ document.addEventListener("DOMContentLoaded", () => {
         let wind_direction = data.current.wind_direction_10m;
         //is it CURRENTLY day or night? 0 = night, 1 = day
         let current_is_day = data.current.is_day;
-        let quart_mins = data.minutely_15.time.slice(0, 7);
-        let quart_mins_temp = data.minutely_15.apparent_temperature.slice(0, 7);
-        let quart_mins_weather_code = data.minutely_15.weather_code.slice(0, 7);
-        let quart_mins_is_day = data.minutely_15.is_day.slice(0, 7);
         
         //update highlight names & values
         highlights_names[0].innerHTML = "Sunrise&#47;Sunset";
@@ -329,128 +311,71 @@ document.addEventListener("DOMContentLoaded", () => {
         highlights_names[6].innerHTML = "Wind Speed&#47;Wind Direction";
         highlights_values[6].innerHTML = `${wind_speed} km&#47;hr <br> ${wind_direction}&deg;`;
         
-        //if the today link is active AKA clicked
-        if (today.classList.contains("active")) {
-            //get the 15-minute time, forecast, weather_codes, and day/night
-            // Determine the temperature unit based on whether Celsius or Fahrenheit is active
-            let temperatureUnit = "°C";
-            if (document.getElementById("feh").classList.contains("active")) {
-                temperatureUnit = "°F";
-                // Convert Celsius temperatures to Fahrenheit for weather cards
-                const updatedCardTemps = quart_mins_temp.map((celsius) => {
-                    const fahrenheit = (celsius * 9) / 5 + 32;
-                    document.getElementById("degree").textContent = `${fahrenheit.toFixed(1)}°F`;
-                    return `${fahrenheit.toFixed(1)}°F`;
-                });
-                // Update card weathers with converted temperatures
-                card_weathers.forEach((weatherElement, index) => {
-                    weatherElement.textContent = updatedCardTemps[index];
-                });
-            } else {
-                // Update card weathers with Celsius temperatures
-                card_weathers.forEach((weatherElement, index) => {
-                    weatherElement.textContent = `${quart_mins_temp[index]}°C`;
-                    document.getElementById("degree").textContent = `${quart_mins_temp[0]}°C`;
-                });
-            }
-            
-            //for each of the cards
+        let quart_mins = data.minutely_15.time.slice(0, 7);
+        let quart_mins_temp = data.minutely_15.apparent_temperature.slice(0, 7);
+        let quart_mins_weather_code = data.minutely_15.weather_code.slice(0, 7);
+        let quart_mins_is_day = data.minutely_15.is_day.slice(0, 7);
+        let days = data.daily.time;
+        let daily_weather_codes = data.daily.weather_code;
+        let daily_min_temp = data.daily.apparent_temperature_min;
+        let daily_max_temp = data.daily.apparent_temperature_max;
+        
+        // Determine which view to display (Today or Week)
+        if (!isWeekView) {
+            // Today view
             for (let i = 0; i < quart_mins.length; i++) {
-                // update the days with the 15 minute windows/intervals
+                // Update time labels
                 card_days[i].innerHTML = quart_mins[i].slice(-5);
-                //weather condition and day/night
+                
+                // Update weather images
                 let weather_code = quart_mins_weather_code[i];
                 let is_day = quart_mins_is_day[i];
-                //replace card image with the right one
                 card_imgs[i].src = update_weather_img(weather_code, is_day);
-                //update weather for each 15-minute window/interval
-                /* card_weathers[i].innerHTML = `${quart_mins_temp[i]}°C`; */
-            }
-        }
-        //if the week link is active AKA clicked
-        else {
-            //next 6 days, their weather conditions and min/max temps 
-            let days = data.daily.time;
-            let daily_weather_codes = data.daily.weather_code;
-            let daily_min_temp = data.daily.apparent_temperature_min;
-            let daily_max_temp = data.daily.apparent_temperature_max;
-            let fahrenheitLink = document.getElementById("feh");
-            fahrenheitLink.addEventListener("click", function() {
-                // Check if the week link is active
-                let weekLink = document.getElementById("week");
-                if (weekLink.classList.contains("active")) {
-                    // Handle Fahrenheit conversion for week data
-                    // Update card weathers with Fahrenheit temperatures
-                    const updatedCardTemps = daily_min_temp.map((celsius, index) => {
-                        const fahrenheitMin = (celsius * 9) / 5 + 32;
-                        const fahrenheitMax = (daily_max_temp[index] * 9) / 5 + 32;
-                        return `${fahrenheitMin.toFixed(1)}°F, ${fahrenheitMax.toFixed(1)}°F`;
-                    });
-                    
-                    console.log("Updated Fahrenheit temperatures:", updatedCardTemps);
-                    
-                    // Update card weathers with converted temperatures
-                    card_weathers.forEach((weatherElement, index) => {
-                        weatherElement.textContent = updatedCardTemps[index];
-                    });
-                    // Update the "degree" element with the first day's Fahrenheit temperature
-                    document.getElementById("degree").textContent = `${daily_min_temp[0]}°F`;
-                } else {
-                    // Handle Fahrenheit conversion for today data
-                    // Update card weathers with Fahrenheit temperatures
-                    const updatedCardTemps = quart_mins_temp.map((celsius) => {
-                        const fahrenheit = (celsius * 9) / 5 + 32;
-                        document.getElementById("degree").textContent = `${fahrenheit.toFixed(1)}°F`;
-                        return `${fahrenheit.toFixed(1)}°F`;
-                    });
-                    
-                    console.log("Updated Fahrenheit temperatures:", updatedCardTemps);
-                    
-                    // Update card weathers with converted temperatures
-                    card_weathers.forEach((weatherElement, index) => {
-                        weatherElement.textContent = updatedCardTemps[index];
-                    });
-                }})
                 
-                //for each of the cards
-                for (let i = 0; i < days.length; i++) {
-                    //update the day with the appropriate day STARTING FROM TODAY
-                    // this  will be used right after the for loop
-                    card_days[i].innerHTML = days[i];
-                    // update card weather image
-                    card_imgs[i].src = update_weather_img(daily_weather_codes[i], current_is_day);
-                    //update min/max temps
-                    card_weathers[i].innerHTML = `${daily_min_temp[i]}°C, ${daily_max_temp[i]}°C`;
-                    // make the font smaller
-                    card_weathers[i].style.fontSize = "14px";
+                // Update temperature display based on unit
+                if (isConverted) {
+                    const fahrenheit = (quart_mins_temp[i] * 9) / 5 + 32;
+                    card_weathers[i].innerHTML = `${fahrenheit.toFixed(1)}°F`;
+                } else {
+                    card_weathers[i].innerHTML = `${quart_mins_temp[i].toFixed(1)}°C`;
                 }
                 
-                //get date and time
-                let today = new Date();
-                // Use 'short' for 3-letter days
-                let options = { weekday: "short" };
-                // Update the card-day elements with today and the next 6 days
-                // Start with today
-                let dayOffset = 0;
+                // Reset font size
+                card_weathers[i].style.fontSize = "16px";
+            }
+        } else {
+            // Week view
+            let today = new Date();
+            let options = { weekday: "short" };
+            
+            for (let i = 0; i < days.length && i < card_days.length; i++) {
+                // Get the day of the week
+                let day = new Date(today);
+                day.setDate(today.getDate() + i);
+                let dayOfWeek = day.toLocaleDateString("en-GB", options);
                 
-                //for each card_day
-                card_days.forEach((card) => {
-                    // Get the day of the week for the current day offset
-                    let day = new Date(today);
-                    //get the corresponding day(starts with today)
-                    day.setDate(today.getDate() + dayOffset);
-                    //turn that into a 3-letter day string
-                    let dayOfWeek = day.toLocaleDateString("en-GB", options);
-                    
-                    // Update the card-day withe corresponding day
-                    card.innerHTML = dayOfWeek;
-                    
-                    // Increment the day offset for the next iteration/card
-                    dayOffset++;
-                });
+                // Update day display
+                card_days[i].innerHTML = dayOfWeek;
                 
-            } 
+                // Update weather image
+                card_imgs[i].src = update_weather_img(daily_weather_codes[i], current_is_day);
+                
+                // Update temperature display based on unit
+                if (isConverted) {
+                    const minF = (daily_min_temp[i] * 9) / 5 + 32;
+                    const maxF = (daily_max_temp[i] * 9) / 5 + 32;
+                    card_weathers[i].innerHTML = `${minF.toFixed(1)}°F, ${maxF.toFixed(1)}°F`;
+                } else {
+                    card_weathers[i].innerHTML = `${daily_min_temp[i].toFixed(1)}°C, ${daily_max_temp[i].toFixed(1)}°C`;
+                }
+                
+                // Make the font smaller for week view (has more text)
+                card_weathers[i].style.fontSize = "14px";
+            }
         }
-        // Call the watchLocation function when the page loads or when needed
-        watchLocation();
-    });
+    }
+    
+    
+    // Call the watchLocation function when the page loads or when needed
+    watchLocation();
+});
