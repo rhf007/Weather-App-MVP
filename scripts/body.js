@@ -190,8 +190,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 let weather_img = document.getElementById("weather-image");
                 //big degree
                 let deg = document.getElementById("degree");
-                //text overlay on the city image
-                let text_overlay = document.getElementById("text-overlay");
                 //date and time
                 let daytime = document.getElementById("day-time");
                 
@@ -210,8 +208,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     // change big degree
                     deg.innerHTML = `${weather_data.current.apparent_temperature}°C`;
                     
-                    //change text overlay according to the detected city
-                    text_overlay.innerText = `${locationData.city}, ${locationData.countryName}`;
                     
                     //display current date and time
                     daytime.innerHTML = `${day}, ${hours}:${minutes}`;
