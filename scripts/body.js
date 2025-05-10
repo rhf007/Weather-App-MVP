@@ -250,37 +250,37 @@ document.addEventListener("DOMContentLoaded", () => {
                     
                     //clear sky
                     if (weather_condition === 0 && day_or_night === 0) {
-                        return "../static/images/glass weather icons/Night/moon.png";
+                        return "./images/glass weather icons/Night/moon.png";
                     } else if (weather_condition === 0 && day_or_night === 1) {
-                        return "../static/images/glass weather icons/Day/sunny.png";
+                        return "./images/glass weather icons/Day/sunny.png";
                     }
                     
                     //partly cloudy
                     else if (weather_condition === 2 && day_or_night === 0) {
-                        return "../static/images/glass weather icons/Night/pcloudy 0.png";
+                        return "./images/glass weather icons/Night/pcloudy 0.png";
                     } else if (weather_condition === 2 && day_or_night === 1) {
-                        return "../static/images/glass weather icons/Day/pcloudy.png";
+                        return "./images/glass weather icons/Day/pcloudy.png";
                     }
                     
                     //cloudy
                     else if (weather_condition === 3 && day_or_night === 0) {
-                        return "../static/images/glass weather icons/Night/mcloudy 0.png";
+                        return "./images/glass weather icons/Night/mcloudy 0.png";
                     } else if (weather_condition === 3 && day_or_night === 1) {
-                        return "../static/images/glass weather icons/Day/Cloudy.png";
+                        return "./images/glass weather icons/Day/Cloudy.png";
                     }
                     
                     //Light Rain
                     else if (weather_condition === 61 && day_or_night === 0) {
-                        return "../static/images/glass weather icons/Night/Lrain 0.png";
+                        return "./images/glass weather icons/Night/Lrain 0.png";
                     } else if (weather_condition === 61 && day_or_night === 1) {
-                        return "../static/images/glass weather icons/Day/Lrain.png";
+                        return "./images/glass weather icons/Day/Lrain.png";
                     }
                     
                     //Medium/Heavy Rain
                     else if ([63, 65].includes(weather_condition) && day_or_night === 0) {
-                        return "../static/images/glass weather icons/Night/rain 0.png";
+                        return "./images/glass weather icons/Night/rain 0.png";
                     } else if ([63, 65].includes(weather_condition) && day_or_night === 1) {
-                        return "../static/images/glass weather icons/Day/Rain.png";
+                        return "./images/glass weather icons/Day/Rain.png";
                     }
                     
                     //Snow
@@ -288,26 +288,26 @@ document.addEventListener("DOMContentLoaded", () => {
                         [71, 73, 75].includes(weather_condition) &&
                         (day_or_night === 0 || day_or_night === 1)
                         ) {
-                            return "../static/images/glass weather icons/Night/Snow.png";
+                            return "./images/glass weather icons/Night/Snow.png";
                         }
                         
                         //thundershower
                         else if (weather_condition === 95 && day_or_night === 0) {
-                            return "../static/images/glass weather icons/Night/Tshower 0.png";
+                            return "./images/glass weather icons/Night/Tshower 0.png";
                         } else if (weather_condition === 95 && day_or_night === 1) {
-                            return "../static/images/glass weather icons/Day/Tshower.png";
+                            return "./images/glass weather icons/Day/Tshower.png";
                         }
                         
                         //thunderstorm
                         else if ([96, 99].includes(weather_condition) && day_or_night === 0) {
-                            return "../static/images/glass weather icons/Night/Tstorm.png";
+                            return "./images/glass weather icons/Night/Tstorm.png";
                         } else if ([96, 99].includes(weather_condition) && day_or_night === 1) {
-                            return "../static/images/glass weather icons/Day/TStorm.png";
+                            return "./images/glass weather icons/Day/TStorm.png";
                         } else {
                             if (day_or_night === 0) {
-                                return "../static/images/glass weather icons/Night/moon.png";
+                                return "./images/glass weather icons/Night/moon.png";
                             } else {
-                                return "../static/images/glass weather icons/Day/sunny.png";
+                                return "./images/glass weather icons/Day/sunny.png";
                             }
                         }
                     }

@@ -21,7 +21,7 @@ html, body {
     height: 100%;
 }
 
-#search-div {
+#left {
     background-color: #fff;
     width: 25%;
     height: 100%;
@@ -64,7 +64,7 @@ html, body {
     color: rgba(0, 0, 0, 0.5);
 }
 
-#weather {
+#right {
     background-color: #fffaeb;
     width: 75%;
     height: 100%;

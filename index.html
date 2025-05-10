@@ -8,10 +8,10 @@
     <title>Weather</title>
 </head>
 <body>
-    <div class="bigbox">
+    <main class="bigbox">
         <!-- LESSON: DIVs won't appear(their background colors at least)
             unless there is literally something inside the <div> tag-->
-                <div id="search-div" class="main-content">
+                <aside id="left" class="main-content">
                     <form>
                         <div class="search">
                             <input id="search-bar" class="search-input" type="search" placeholder="Search for a city">
@@ -19,7 +19,7 @@
                     </form>
                     
                     <div class="inside-search-center">
-                        <img id="weather-image" src="../static/images/glass weather icons/Day/sunny.png">
+                        <img id="weather-image" src="./images/glass weather icons/Day/sunny.png">
                     </div>
                     
                     <div class="inside-search-left">
@@ -46,21 +46,9 @@
                                 <p id="text-overlay">New York, NY, USA</p>
                             </div>
                         </div> -->
-                        <div id="city-img-div" class="inside-search-center">
-                            {% if random_photo %}
-                            <div class="random-photo-overlay">
-                                <img src="{{ random_photo }}" alt="Random Photo">
-                            </div>
-                            {% endif %}
-                            
-                            <!-- Existing text overlay for the city -->
-                            <div class="text-overlay">
-                                <p id="text-overlay">New York, NY, USA</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div id="weather" class="main-content">
+                </aside>
+                
+                <section id="right" class="main-content">
                         <nav class="navbar">
                             <div class="navbar-divs">
                                 <a href="#" class="today-week active" id="today">Today</a>
@@ -77,43 +65,43 @@
                         <div class="weather">
                             <div class="weather-cards">
                                 <p class="card-day">Sun</p>
-                                <img class="card-img" src="../static/images/3d solid weather icons/Tshower.png">
+                                <img class="card-img" src="./images/3d solid weather icons/Tshower.png">
                                 <p class="card-weather">15°-7°</p>
                             </div>
                             
                             <div class="weather-cards">
                                 <p class="card-day">Sun</p>
-                                <img class="card-img" src="../static/images/3d solid weather icons/Tshower.png">
+                                <img class="card-img" src="./images/3d solid weather icons/Tshower.png">
                                 <p class="card-weather">15°-7°</p>
                             </div>
                             
                             <div class="weather-cards">
                                 <p class="card-day">Sun</p>
-                                <img class="card-img" src="../static/images/3d solid weather icons/Tshower.png">
+                                <img class="card-img" src="./images/3d solid weather icons/Tshower.png">
                                 <p class="card-weather">15°-7°</p>
                             </div>
                             
                             <div class="weather-cards">
                                 <p class="card-day">Sun</p>
-                                <img class="card-img" src="../static/images/3d solid weather icons/Tshower.png">
+                                <img class="card-img" src="./images/3d solid weather icons/Tshower.png">
                                 <p class="card-weather">15°-7°</p>
                             </div>
                             
                             <div class="weather-cards">
                                 <p class="card-day">Sun</p>
-                                <img class="card-img" src="../static/images/3d solid weather icons/Tshower.png">
+                                <img class="card-img" src="./images/3d solid weather icons/Tshower.png">
                                 <p class="card-weather">15°-7°</p>
                             </div>
                             
                             <div class="weather-cards">
                                 <p class="card-day">Sun</p>
-                                <img class="card-img" src="../static/images/3d solid weather icons/Tshower.png">
+                                <img class="card-img" src="./images/3d solid weather icons/Tshower.png">
                                 <p class="card-weather">15°-7°</p>
                             </div>
                             
                             <div class="weather-cards">
                                 <p class="card-day">Sun</p>
-                                <img class="card-img" src="../static/images/3d solid weather icons/Tshower.png">
+                                <img class="card-img" src="./images/3d solid weather icons/Tshower.png">
                                 <p class="card-weather">15°-7°</p>
                             </div>
                         </div>
@@ -156,13 +144,13 @@
                                 <p class="highlight-value"> 7.70 km/h</p>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <script src="./scripts/body.js"></script>
-            </body>
-            </html>
+                </section>
+    </main>
+    <script src="./scripts/body.js"></script>
+</body>
+</html>
             <!--TODO: fix celsius/fehrenheit issue
-                TODO: remove city picture part
                 TODO: implement search
                 TODO: find a better way to handle images
-                TODO: refactor js-->
+                TODO: refactor js
+                TODO: make it responsive-->
