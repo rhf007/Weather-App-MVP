@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="./styles/style.css">
     <title>Weather</title>
 </head>
 <body>
     <main class="bigbox">
         <aside id="left" class="main-content">
-            <form>
+            <!--we're delaying that one for now-->
+            <!-- <form>
                 <div class="search">
                     <input id="search-bar" class="search-input" type="search" placeholder="Search for a city">
                 </div>
-            </form>
+            </form> -->
+            
+            <div class="city-name">
+                <p id="city">Loading city...</p>
+            </div>
             
             <div class="inside-search-center">
                 <img id="weather-image" src="./images/glass weather icons/Day/sunny.png">
@@ -130,6 +135,6 @@
     <script src="./scripts/body.js"></script>
 </body>
 </html>
-            <!--TODO: implement search
-                TODO: refactor js
-                TODO: make it responsive(refactor css)-->
+<!--TODO: apply some style for the city name (with responsiveness)
+TODO: refactor js
+TODO: make it responsive(refactor css)-->

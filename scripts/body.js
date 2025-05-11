@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 updateSearchDiv(data, locationData);
                 
                 // Update the search bar with the detected city and country info
-                update_search_bar(locationData);
+                update_city(locationData);
                 
                 // Update the weather div(right side)
                 update_weather_div(data);
@@ -177,15 +177,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     // update the search bar with the detected city and country info
-    function update_search_bar(locationData) {
-        //search bar
-        const searchBar = document.getElementById("search-bar");
+    function update_city(locationData) {
+        const cityElement = document.getElementById("city");
         
-        //if there is in fact a search bar
-        if (searchBar) {
-            // Update the search bar content with the detcted city, state, and country
-            searchBar.value = `${locationData.city}, ${locationData.principalSubdivision}, ${locationData.countryName}`;
-            
+        if (cityElement) {
+            // Show city, state, and country in a separate div
+            cityElement.innerHTML = `${locationData.city}, ${locationData.principalSubdivision}, ${locationData.countryName}`;
         }
     }
     
