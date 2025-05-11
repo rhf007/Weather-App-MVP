@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         
     }
-
+    
     // Dedicated function to update the main temperature display
     function updateMainTemperature(temperature) {
         let deg = document.getElementById("degree");
@@ -189,75 +189,88 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     
+    // mapping object for weather conditions
+    const weatherImageMap = {
+        // Structure: 
+        // [weatherCode]: { day: day image, night: night image }
+        0: { 
+            day: "./images/glass weather icons/Day/sunny.png", 
+            night: "./images/glass weather icons/Night/moon.png" 
+        },
+        2: { 
+            day: "./images/glass weather icons/Day/pcloudy.png", 
+            night: "./images/glass weather icons/Night/pcloudy 0.png" 
+        },
+        3: { 
+            day: "./images/glass weather icons/Day/Cloudy.png", 
+            night: "./images/glass weather icons/Night/mcloudy 0.png" 
+        },
+        61: { 
+            day: "./images/glass weather icons/Day/Lrain.png", 
+            night: "./images/glass weather icons/Night/Lrain 0.png" 
+        },
+        63: { 
+            day: "./images/glass weather icons/Day/Rain.png", 
+            night: "./images/glass weather icons/Night/rain 0.png" 
+        },
+        65: { 
+            day: "./images/glass weather icons/Day/Rain.png", 
+            night: "./images/glass weather icons/Night/rain 0.png" 
+        },
+        71: { 
+            day: "./images/glass weather icons/Night/Snow.png", 
+            night: "./images/glass weather icons/Night/Snow.png" 
+        },
+        73: { 
+            day: "./images/glass weather icons/Night/Snow.png", 
+            night: "./images/glass weather icons/Night/Snow.png" 
+        },
+        75: { 
+            day: "./images/glass weather icons/Night/Snow.png", 
+            night: "./images/glass weather icons/Night/Snow.png" 
+        },
+        95: { 
+            day: "./images/glass weather icons/Day/Tshower.png", 
+            night: "./images/glass weather icons/Night/Tshower 0.png" 
+        },
+        96: { 
+            day: "./images/glass weather icons/Day/TStorm.png", 
+            night: "./images/glass weather icons/Night/Tstorm.png" 
+        },
+        99: { 
+            day: "./images/glass weather icons/Day/TStorm.png", 
+            night: "./images/glass weather icons/Night/Tstorm.png" 
+        }
+    };
     
+    // fallback images
+    const defaultImages = {
+        day: "./images/glass weather icons/Day/sunny.png",
+        night: "./images/glass weather icons/Night/moon.png"
+    };
     
-    // update the weather image
-    // check for the weather condition and day/night
-    //return the path to the right image
-    function update_weather_img(weather_condition, day_or_night) {
+    // Function to update the weather image
+    // Takes weather condition code and day/night flag (0 = night, 1 = day)
+    function update_weather_img(weather_condition, is_day) {
+        // Convert is_day to string key for readability
+        let timeOfDay;
         
-        //clear sky
-        if (weather_condition === 0 && day_or_night === 0) {
-            return "./images/glass weather icons/Night/moon.png";
-        } else if (weather_condition === 0 && day_or_night === 1) {
-            return "./images/glass weather icons/Day/sunny.png";
-        }
-        
-        //partly cloudy
-        else if (weather_condition === 2 && day_or_night === 0) {
-            return "./images/glass weather icons/Night/pcloudy 0.png";
-        } else if (weather_condition === 2 && day_or_night === 1) {
-            return "./images/glass weather icons/Day/pcloudy.png";
-        }
-        
-        //cloudy
-        else if (weather_condition === 3 && day_or_night === 0) {
-            return "./images/glass weather icons/Night/mcloudy 0.png";
-        } else if (weather_condition === 3 && day_or_night === 1) {
-            return "./images/glass weather icons/Day/Cloudy.png";
-        }
-        
-        //Light Rain
-        else if (weather_condition === 61 && day_or_night === 0) {
-            return "./images/glass weather icons/Night/Lrain 0.png";
-        } else if (weather_condition === 61 && day_or_night === 1) {
-            return "./images/glass weather icons/Day/Lrain.png";
-        }
-        
-        //Medium/Heavy Rain
-        else if ([63, 65].includes(weather_condition) && day_or_night === 0) {
-            return "./images/glass weather icons/Night/rain 0.png";
-        } else if ([63, 65].includes(weather_condition) && day_or_night === 1) {
-            return "./images/glass weather icons/Day/Rain.png";
-        }
-        
-        //Snow
-        else if (
-            [71, 73, 75].includes(weather_condition) &&
-            (day_or_night === 0 || day_or_night === 1)
-        ) {
-            return "./images/glass weather icons/Night/Snow.png";
-        }
-        
-        //thundershower
-        else if (weather_condition === 95 && day_or_night === 0) {
-            return "./images/glass weather icons/Night/Tshower 0.png";
-        } else if (weather_condition === 95 && day_or_night === 1) {
-            return "./images/glass weather icons/Day/Tshower.png";
-        }
-        
-        //thunderstorm
-        else if ([96, 99].includes(weather_condition) && day_or_night === 0) {
-            return "./images/glass weather icons/Night/Tstorm.png";
-        } else if ([96, 99].includes(weather_condition) && day_or_night === 1) {
-            return "./images/glass weather icons/Day/TStorm.png";
+        if (is_day === 1) {
+            timeOfDay = 'day';
         } else {
-            if (day_or_night === 0) {
-                return "./images/glass weather icons/Night/moon.png";
-            } else {
-                return "./images/glass weather icons/Day/sunny.png";
-            }
+            timeOfDay = 'night';
         }
+        
+        // Look up the weather condition in our map
+        const weatherType = weatherImageMap[weather_condition];
+        
+        // If we have this weather condition in our map, return the appropriate day/night image
+        if (weatherType) {
+            return weatherType[timeOfDay];
+        }
+        
+        // If weather condition isn't in our map, return the default image for day/night
+        return defaultImages[timeOfDay];
     }
     
     //update the right side
@@ -374,7 +387,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     }
-    
     
     // Call the watchLocation function when the page loads or when needed
     watchLocation();

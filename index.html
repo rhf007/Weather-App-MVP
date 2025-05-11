@@ -4,135 +4,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./styles/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Weather</title>
 </head>
 <body>
     <main class="bigbox">
-        <!-- LESSON: DIVs won't appear(their background colors at least)
-            unless there is literally something inside the <div> tag-->
-                <aside id="left" class="main-content">
-                    <form>
-                        <div class="search">
-                            <input id="search-bar" class="search-input" type="search" placeholder="Search for a city">
-                        </div>
-                    </form>
-                    
-                    <div class="inside-search-center">
-                        <img id="weather-image" src="./images/glass weather icons/Day/sunny.png">
-                    </div>
-                    
-                    <div class="inside-search-left">
-                        <p id="degree">12°C</p>
-                    </div>
-                    
-                    <div class="inside-search-left">
-                        <p id="day-time">Monday, 16:00</p>
-                    </div>
-                </aside>
+        <aside id="left" class="main-content">
+            <form>
+                <div class="search">
+                    <input id="search-bar" class="search-input" type="search" placeholder="Search for a city">
+                </div>
+            </form>
+            
+            <div class="inside-search-center">
+                <img id="weather-image" src="./images/glass weather icons/Day/sunny.png">
+            </div>
+            
+            <div class="inside-search-left">
+                <p id="degree">12°C</p>
+            </div>
+            
+            <div class="inside-search-left">
+                <p id="day-time">Monday, 16:00</p>
+            </div>
+        </aside>
+        
+        <section id="right" class="main-content">
+            <nav class="navbar">
+                <div class="navbar-divs">
+                    <a href="#" class="today-week active" id="today">Today</a>
+                    <a href="#" class="today-week" id="week">Week</a>
+                </div>
                 
-                <section id="right" class="main-content">
-                        <nav class="navbar">
-                            <div class="navbar-divs">
-                                <a href="#" class="today-week active" id="today">Today</a>
-                                <a href="#" class="today-week" id="week">Week</a>
-                            </div>
-                            
-                            <div class="navbar-divs">
-                                <button id="cel" href="#" class="cel-feh active">°C</button>
-                                <button id="feh" href="#" class="cel-feh">°F</button>
-                            </div>
-                            
-                        </nav>
-                        
-                        <div class="weather">
-                            <div class="weather-cards">
-                                <p class="card-day">Sun</p>
-                                <img class="card-img" src="./images/3d solid weather icons/Tshower.png">
-                                <p class="card-weather">15°-7°</p>
-                            </div>
-                            
-                            <div class="weather-cards">
-                                <p class="card-day">Sun</p>
-                                <img class="card-img" src="./images/3d solid weather icons/Tshower.png">
-                                <p class="card-weather">15°-7°</p>
-                            </div>
-                            
-                            <div class="weather-cards">
-                                <p class="card-day">Sun</p>
-                                <img class="card-img" src="./images/3d solid weather icons/Tshower.png">
-                                <p class="card-weather">15°-7°</p>
-                            </div>
-                            
-                            <div class="weather-cards">
-                                <p class="card-day">Sun</p>
-                                <img class="card-img" src="./images/3d solid weather icons/Tshower.png">
-                                <p class="card-weather">15°-7°</p>
-                            </div>
-                            
-                            <div class="weather-cards">
-                                <p class="card-day">Sun</p>
-                                <img class="card-img" src="./images/3d solid weather icons/Tshower.png">
-                                <p class="card-weather">15°-7°</p>
-                            </div>
-                            
-                            <div class="weather-cards">
-                                <p class="card-day">Sun</p>
-                                <img class="card-img" src="./images/3d solid weather icons/Tshower.png">
-                                <p class="card-weather">15°-7°</p>
-                            </div>
-                            
-                            <div class="weather-cards">
-                                <p class="card-day">Sun</p>
-                                <img class="card-img" src="./images/3d solid weather icons/Tshower.png">
-                                <p class="card-weather">15°-7°</p>
-                            </div>
-                        </div>
-                        
-                        <p class="todays-highlights">Today's Highlights</p>
-                        
-                        <div class="highlights">
-                            <div class="highlight-cards">
-                                <p class="highlight-name">UV Index</p>
-                                <p class="highlight-value"> 7.70 km/h</p>
-                            </div>
-                            
-                            <div class="highlight-cards">
-                                <p class="highlight-name">UV Index</p>
-                                <p class="highlight-value"> 7.70 km/h</p>
-                            </div>
-                            
-                            <div class="highlight-cards">
-                                <p class="highlight-name">UV Index</p>
-                                <p class="highlight-value"> 7.70 km/h</p>
-                            </div>
-                            
-                            <div class="highlight-cards">
-                                <p class="highlight-name">UV Index</p>
-                                <p class="highlight-value"> 7.70 km/h</p>
-                            </div>
-                            
-                            <div class="highlight-cards">
-                                <p class="highlight-name">UV Index</p>
-                                <p class="highlight-value"> 7.70 km/h</p>
-                            </div>
-                            
-                            <div class="highlight-cards">
-                                <p class="highlight-name">UV Index</p>
-                                <p class="highlight-value"> 7.70 km/h</p>
-                            </div>
-                            
-                            <div class="highlight-cards">
-                                <p id="smaller-highlight-name" class="highlight-name">UV Index</p>
-                                <p class="highlight-value"> 7.70 km/h</p>
-                            </div>
-                        </div>
-                </section>
+                <div class="navbar-divs">
+                    <button id="cel" href="#" class="cel-feh active">°C</button>
+                    <button id="feh" href="#" class="cel-feh">°F</button>
+                </div>
+                
+            </nav>
+            
+            <div class="weather">
+                <div class="weather-cards">
+                    <p class="card-day">Sun</p>
+                    <img class="card-img" src="./images/3d solid weather icons/Tshower.png">
+                    <p class="card-weather">15°-7°</p>
+                </div>
+                
+                <div class="weather-cards">
+                    <p class="card-day">Sun</p>
+                    <img class="card-img" src="./images/3d solid weather icons/Tshower.png">
+                    <p class="card-weather">15°-7°</p>
+                </div>
+                
+                <div class="weather-cards">
+                    <p class="card-day">Sun</p>
+                    <img class="card-img" src="./images/3d solid weather icons/Tshower.png">
+                    <p class="card-weather">15°-7°</p>
+                </div>
+                
+                <div class="weather-cards">
+                    <p class="card-day">Sun</p>
+                    <img class="card-img" src="./images/3d solid weather icons/Tshower.png">
+                    <p class="card-weather">15°-7°</p>
+                </div>
+                
+                <div class="weather-cards">
+                    <p class="card-day">Sun</p>
+                    <img class="card-img" src="./images/3d solid weather icons/Tshower.png">
+                    <p class="card-weather">15°-7°</p>
+                </div>
+                
+                <div class="weather-cards">
+                    <p class="card-day">Sun</p>
+                    <img class="card-img" src="./images/3d solid weather icons/Tshower.png">
+                    <p class="card-weather">15°-7°</p>
+                </div>
+                
+                <div class="weather-cards">
+                    <p class="card-day">Sun</p>
+                    <img class="card-img" src="./images/3d solid weather icons/Tshower.png">
+                    <p class="card-weather">15°-7°</p>
+                </div>
+            </div>
+            
+            <p class="todays-highlights">Today's Highlights</p>
+            
+            <div class="highlights">
+                <div class="highlight-cards">
+                    <p class="highlight-name">UV Index</p>
+                    <p class="highlight-value"> 7.70 km/h</p>
+                </div>
+                
+                <div class="highlight-cards">
+                    <p class="highlight-name">UV Index</p>
+                    <p class="highlight-value"> 7.70 km/h</p>
+                </div>
+                
+                <div class="highlight-cards">
+                    <p class="highlight-name">UV Index</p>
+                    <p class="highlight-value"> 7.70 km/h</p>
+                </div>
+                
+                <div class="highlight-cards">
+                    <p class="highlight-name">UV Index</p>
+                    <p class="highlight-value"> 7.70 km/h</p>
+                </div>
+                
+                <div class="highlight-cards">
+                    <p class="highlight-name">UV Index</p>
+                    <p class="highlight-value"> 7.70 km/h</p>
+                </div>
+                
+                <div class="highlight-cards">
+                    <p class="highlight-name">UV Index</p>
+                    <p class="highlight-value"> 7.70 km/h</p>
+                </div>
+                
+                <div class="highlight-cards">
+                    <p id="smaller-highlight-name" class="highlight-name">UV Index</p>
+                    <p class="highlight-value"> 7.70 km/h</p>
+                </div>
+            </div>
+        </section>
     </main>
     <script src="./scripts/body.js"></script>
 </body>
 </html>
             <!--TODO: implement search
-                TODO: find a better way to handle images
                 TODO: refactor js
-                TODO: make it responsive-->
+                TODO: make it responsive(refactor css)-->
