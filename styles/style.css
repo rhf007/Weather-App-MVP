@@ -5,63 +5,11 @@
     margin: 0;
     font-family: "Poppins", sans-serif;
     box-sizing: border-box;
-    scroll-behavior: smooth;
-}
-
-/*LESSON: for percentage heights to work properly, the parent 
-elements must also have a defined height.*/
-
-html, body {
-    height: 100%;
-}
-
-.bigbox {
-    display: flex;
-    width: 100%;
-    height: 100%;
 }
 
 #left {
     background-color: #fff;
-    width: 25%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-    flex-wrap: wrap;
-    padding: 0 20px;
-}
-
-.search {
-    /*width of conatiner is determined by the content within it*/
-    width: max-content;
-    margin-top: 16px;
-    display: flex;
-    align-items: center;
-    padding: 8px;
-    border-radius: 28px;
-    background: #f6f6f6;
-    transition: box-shadow 0.25s;
-}
-
-/*when something inside .search gets focused*/
-.search:focus-within {
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.75);
-}
-
-.search-input {
-    font-size: 16px;
-    color: #333;
-    margin-left: 14px;
-    outline: none;
-    border: none;
-    background: transparent;
-}
-
-.search-input::placeholder,
-.search-icon {
-    color: rgba(0, 0, 0, 0.5);
+    gap: 5%;
 }
 
 #right {
@@ -71,32 +19,18 @@ html, body {
     padding: 0 16px;
 }
 
-
-.inside-search-center, .inside-search-left p {
-    display: inline;
-}
-
-.inside-search-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/*for left alignment*/
-.inside-search-left{
-    margin-right: auto;
-}
-
-#weather-image {
-    width: 80%;
+#city{
+    font-size: 1.5em;
+    text-align: center;
 }
 
 #degree {
-    font-size: 48px;
+    font-size: 4em;
+    font-weight: 500;
 }
 
 #day-time {
-    font-size: 20px;
+    font-size: 2em;
     font-weight: 500;
 }
 
