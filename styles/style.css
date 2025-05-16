@@ -9,14 +9,11 @@
 
 #left {
     background-color: #fff;
-    gap: 5%;
 }
 
 #right {
     background-color: #FDE6D8;
-    width: 75%;
-    height: 100%;
-    padding: 0 16px;
+    padding: 0 1%;
 }
 
 #city{
