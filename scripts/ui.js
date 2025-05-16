@@ -59,88 +59,94 @@ function update_city(locationData) {
     }
 }
 
-//update the right side
-function update_right(data) {
+function render_weather_cards(count) {
+    const container = document.getElementById("weather-cards-container");
+    container.innerHTML = "";
+
+    const row = document.createElement("div");
+    row.className = "row w-100 g-1";
+    container.appendChild(row);
     
-    //card days
+    for (let i = 0; i < count; i++) {
+        const col = document.createElement("div");
+        col.className = "col-6 col-sm-4 col-md-3 col-lg-2 col-xl mb-2";
+        
+        const card = document.createElement("div");
+        card.className = "weather-cards d-flex flex-column flex-wrap justify-content-center align-items-center border-0 rounded-3 h-100";
+        
+        card.innerHTML = `
+            <p class="card-day mb-1">---</p>
+            <img class="card-img my-1" src="" alt="weather icon">
+            <p class="card-weather mt-1 mb-0">--°</p>
+        `;
+        
+        col.appendChild(card);
+        row.appendChild(col);
+    }
+}
+
+function update_right(data) {
+    const days = data.daily.time;
+    const quart_mins = data.minutely_15.time.slice(0, 7);
+    
+    // Dynamically render cards
+    if (!isWeekView) {
+        render_weather_cards(quart_mins.length);
+    } else {
+        render_weather_cards(Math.min(days.length, 7));
+    }
+    
+    // Now reselect elements
     let card_days = document.querySelectorAll(".card-day");
-    //card images
     let card_imgs = document.querySelectorAll(".card-img");
-    //card weathers
     let card_weathers = document.querySelectorAll(".card-weather");
-    //name of highlight in today's highlights
     let highlights_names = document.querySelectorAll(".highlight-name");
-    //name of highlight in today's highlights
     let highlights_values = document.querySelectorAll(".highlight-value");
     
-    //sunrise time today
-    let sunrise = data.daily.sunrise[0].slice(-5);
-    //sunset time today
-    let sunset = data.daily.sunset[0].slice(-5);
-    //Max UV Index
-    let uv_idx = data.daily.uv_index_max[0];
-    //humidity
-    let humidity = data.current.relative_humidity_2m;
-    //precipitation
-    let precipitation = data.daily.precipitation_probability_max[0];
-    //rain
-    let rain = data.daily.rain_sum[0];
-    //snowfall
-    let snowfall = data.daily.snowfall_sum[0];
-    //wind speed
-    let wind_speed = data.current.wind_speed_10m;
-    //wid direction
-    let wind_direction = data.current.wind_direction_10m;
-    //is it CURRENTLY day or night? 0 = night, 1 = day
-    let current_is_day = data.current.is_day;
-    
-    //update highlight names & values
+    // Highlights
     highlights_names[0].innerHTML = "Sunrise&#47;Sunset";
-    highlights_values[0].innerHTML = `${sunrise}<br>${sunset}`;
+    highlights_values[0].innerHTML = `${data.daily.sunrise[0].slice(-5)}<br>${data.daily.sunset[0].slice(-5)}`;
     highlights_names[1].innerHTML = "UV Index";
-    highlights_values[1].innerHTML = `${uv_idx}`;
+    highlights_values[1].innerHTML = `${data.daily.uv_index_max[0]}`;
     highlights_names[2].innerHTML = "Humidity";
-    highlights_values[2].innerHTML = `${humidity}&#37;`;
+    highlights_values[2].innerHTML = `${data.current.relative_humidity_2m}&#37;`;
     highlights_names[3].innerHTML = "Precipitation";
-    highlights_values[3].innerHTML = `${precipitation}&#37;`;
+    highlights_values[3].innerHTML = `${data.daily.precipitation_probability_max[0]}&#37;`;
     highlights_names[4].innerHTML = "Rain Sum";
-    highlights_values[4].innerHTML = `${rain} mm`;
+    highlights_values[4].innerHTML = `${data.daily.rain_sum[0]} mm`;
     highlights_names[5].innerHTML = "Snowfall Sum";
-    highlights_values[5].innerHTML = `${snowfall} cm`;
+    highlights_values[5].innerHTML = `${data.daily.snowfall_sum[0]} cm`;
     highlights_names[6].innerHTML = "Wind Speed&#47;Wind Direction";
-    highlights_values[6].innerHTML = `${wind_speed} km&#47;hr <br> ${wind_direction}&deg;`;
+    highlights_values[6].innerHTML = `${data.current.wind_speed_10m} km&#47;hr <br> ${data.current.wind_direction_10m}&deg;`;
     
-    let quart_mins = data.minutely_15.time.slice(0, 7);
+    // Data extraction
     let quart_mins_temp = data.minutely_15.apparent_temperature.slice(0, 7);
     let quart_mins_weather_code = data.minutely_15.weather_code.slice(0, 7);
     let quart_mins_is_day = data.minutely_15.is_day.slice(0, 7);
-    let days = data.daily.time;
     let daily_weather_codes = data.daily.weather_code;
     let daily_min_temp = data.daily.apparent_temperature_min;
     let daily_max_temp = data.daily.apparent_temperature_max;
+    let current_is_day = data.current.is_day;
     
-    // Determine which view to display (Today or Week)
+    console.log("=== 15-min Weather Codes (Today View) ===");
+    console.log(quart_mins_weather_code);
+    
+    console.log("=== Daily Weather Codes (Week View) ===");
+    console.log(daily_weather_codes);
+    
     if (!isWeekView) {
         // Today view
         for (let i = 0; i < quart_mins.length; i++) {
-            // Update time labels
             card_days[i].innerHTML = quart_mins[i].slice(-5);
+            card_imgs[i].src = update_weather_img(quart_mins_weather_code[i], quart_mins_is_day[i]);
+            console.log(`Card ${i}: Code=${quart_mins_weather_code[i]}, IsDay=${quart_mins_is_day[i]}, Image=${card_imgs[i].src}`);
             
-            // Update weather images
-            let weather_code = quart_mins_weather_code[i];
-            let is_day = quart_mins_is_day[i];
-            card_imgs[i].src = update_weather_img(weather_code, is_day);
-            
-            // Update temperature display based on unit
             if (isConverted) {
                 const fahrenheit = (quart_mins_temp[i] * 9) / 5 + 32;
                 card_weathers[i].innerHTML = `${fahrenheit.toFixed(1)}°F`;
             } else {
                 card_weathers[i].innerHTML = `${quart_mins_temp[i].toFixed(1)}°C`;
             }
-            
-            // Reset font size
-            card_weathers[i].style.fontSize = "16px";
         }
     } else {
         // Week view
@@ -148,18 +154,15 @@ function update_right(data) {
         let options = { weekday: "short" };
         
         for (let i = 0; i < days.length && i < card_days.length; i++) {
-            // Get the day of the week
             let day = new Date(today);
             day.setDate(today.getDate() + i);
             let dayOfWeek = day.toLocaleDateString("en-GB", options);
             
-            // Update day display
             card_days[i].innerHTML = dayOfWeek;
-            
-            // Update weather image
             card_imgs[i].src = update_weather_img(daily_weather_codes[i], current_is_day);
+            console.log(`Card ${i}: Code=${daily_weather_codes[i]}, IsDay=${current_is_day}, Image=${card_imgs[i].src}`);
+
             
-            // Update temperature display based on unit
             if (isConverted) {
                 const minF = (daily_min_temp[i] * 9) / 5 + 32;
                 const maxF = (daily_max_temp[i] * 9) / 5 + 32;
@@ -167,11 +170,9 @@ function update_right(data) {
             } else {
                 card_weathers[i].innerHTML = `${daily_min_temp[i].toFixed(1)}°C, ${daily_max_temp[i].toFixed(1)}°C`;
             }
-            
-            // Make the font smaller for week view (has more text)
-            card_weathers[i].style.fontSize = "14px";
         }
     }
 }
+
 
 export { update_left, update_city, update_right, updateMainTemperature };
