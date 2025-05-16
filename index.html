@@ -9,7 +9,6 @@
     <title>Weather</title>
 </head>
 <body>
-    <!-- bigbox d-flex flex-column flex-lg-row w-100 h-100 -->
     <main class="container-fluid">
         <div class="row min-vh-100">
             <aside id="left" class="main-content mh-100 col-12 col-xl-3 d-flex flex-column justify-content-around align-items-center flex-wrap px-3">
@@ -29,16 +28,16 @@
             </div>
             </aside>
 
-            <section id="right" class="main-content mh-100 col-12 col-xl-9">
-            <nav class="navbar">
+            <section id="right" class="main-content mh-100 col-12 col-xl-9 px-3 d-flex flex-column">
+            <nav class="navbar d-flex justify-content-between align-items-center p-2">
                 <div class="navbar-divs">
-                    <a href="#" class="today-week active" id="today">Today</a>
-                    <a href="#" class="today-week" id="week">Week</a>
+                    <a href="#" class="today-week active ms-3 position-relative" id="today">Today</a>
+                    <a href="#" class="today-week ms-3 position-relative" id="week">Week</a>
                 </div>
                 
                 <div class="navbar-divs">
-                    <button id="cel" href="#" class="cel-feh active">°C</button>
-                    <button id="feh" href="#" class="cel-feh">°F</button>
+                    <button id="cel" href="#" class="cel-feh active me-3 position-relative d-flex justify-content-center align-items-center">°C</button>
+                    <button id="feh" href="#" class="cel-feh me-3 position-relative d-flex justify-content-center align-items-center">°F</button>
                 </div>
                 
             </nav>

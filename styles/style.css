@@ -11,11 +11,6 @@
     background-color: #fff;
 }
 
-#right {
-    background-color: #FDE6D8;
-    padding: 0 1%;
-}
-
 #city{
     font-size: 1.5em;
     text-align: center;
@@ -31,23 +26,13 @@
     font-weight: 500;
 }
 
-.small-weather-images {
-    width: 10%;
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-    /* Add padding for spacing */
-    padding: 8px;
+#right {
+    background-color: #FDE6D8;
 }
 
 .today-week {
-    margin-left: 16px;
     color: #817F82;
     text-decoration: none;
-    position: relative;
     transition: color 0.3s ease-in-out;
 }
 
@@ -87,34 +72,18 @@
 }
 
 .cel-feh {
-    margin-right: 16px;
     background-color: #fff;
-    position: relative;
-    /*to apply width and height */
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    /* Create a perfect circle using border-radius */
+    width: 2.5rem;
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
-    text-align: center;
-    line-height: 30px;
     color: #141115;
     text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.cel-feh:hover {
+.cel-feh:hover, .cel-feh.active {
     background-color: #141115;
     color: white;
-}
-
-.cel-feh.active {
-    background-color: #141115;
-    color: white;
-    /* Add any additional styles for the active state */
 }
 
 .weather {
