@@ -58,6 +58,67 @@ const defaultImages = {
     night: "./images/glass weather icons/Night/moon.png"
 };
 
+function renderHighlights(containerElement, data) {
+    const highlightData = [
+        {
+            name: "Sunrise/Sunset",
+            value: `${data.daily.sunrise[0].slice(-5)}<br>${data.daily.sunset[0].slice(-5)}`
+        },
+        {
+            name: "UV Index",
+            value: `${data.daily.uv_index_max[0]}`
+        },
+        {
+            name: "Humidity",
+            value: `${data.current.relative_humidity_2m}%`
+        },
+        {
+            name: "Precipitation",
+            value: `${data.daily.precipitation_probability_max[0]}%`
+        },
+        {
+            name: "Rain Sum",
+            value: `${data.daily.rain_sum[0]} mm`
+        },
+        {
+            name: "Snowfall Sum",
+            value: `${data.daily.snowfall_sum[0]} cm`
+        },
+        {
+            name: "Wind Speed/Wind Direction",
+            value: `${data.current.wind_speed_10m} km/hr <br> ${data.current.wind_direction_10m}&deg;`
+        }
+    ];
+
+    containerElement.innerHTML = "";
+
+    const row = document.createElement("div");
+    row.className = "row g-3";
+    containerElement.appendChild(row);
+
+    highlightData.forEach(item => {
+        const col = document.createElement("div");
+        // Fixed width columns that maintain their size and wrap when needed
+        col.className = "col-6 col-sm-4 col-md-3 col-xl-2 mb-3";
+        
+        const card = document.createElement("div");
+        card.className = "highlight-cards d-flex flex-column justify-content-center align-items-center border-0 rounded-3";
+        
+        const name = document.createElement("p");
+        name.className = "highlight-name mb-2";
+        name.innerHTML = item.name;
+
+        const value = document.createElement("p");
+        value.className = "highlight-value";
+        value.innerHTML = item.value;
+
+        card.appendChild(name);
+        card.appendChild(value);
+        col.appendChild(card);
+        row.appendChild(col);
+    });
+}
+
 // Function to update the weather image
 // Takes weather condition code and day/night flag (0 = night, 1 = day)
 function update_weather_img(weather_condition, is_day) {
@@ -82,4 +143,4 @@ function update_weather_img(weather_condition, is_day) {
     return defaultImages[timeOfDay];
 }
 
-export { update_weather_img };
+export { update_weather_img, renderHighlights };

@@ -30,6 +30,10 @@
     background-color: #FDE6D8;
 }
 
+.navbar-divs {
+    display: flex;
+}
+
 .today-week {
     font-size: 1.25em;
     font-weight: 600;
@@ -114,48 +118,40 @@
     word-break: break-word;
 }
 
-.navbar-divs {
-    display: flex;
-}
-
 .todays-highlights {
-    margin-bottom: 16px;
-    font-size: 32px;
+    font-size: 2em;
     font-weight: 500;
 }
 
-.highlights {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin: 0 auto;
-}
 
 .highlight-cards {
     background-color: #fff;
-    width: 200px;
-    height: 140px;
-    margin: 16px;
+    aspect-ratio: 1 / 1;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    word-wrap: break-word;
+    overflow: hidden;
+    width: 100%;
     display: flex;
-    align-items: center;
     flex-direction: column;
-    text-align: center;
-    border-radius: 16px;
+    justify-content: center;
+    align-items: center;
 }
 
 .highlight-name {
     color: #817F82;
     font-weight: 500;
-    margin-top: 8px;
-    font-size: 20px;
+    font-size: 1.1rem;
+    text-align: center;
+    width: 100%;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .highlight-value {
-    margin-top: 24px;
-    font-size: 20px;
+    font-size: 1.2rem;
     font-weight: bold;
-}
-
-#smaller-highlight-name {
-    font-size: 13px;
+    text-align: center;
+    width: 100%;
+    overflow-wrap: break-word;
 }

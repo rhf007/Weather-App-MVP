@@ -1,4 +1,4 @@
-import { update_weather_img } from './utils.js';
+import { update_weather_img, renderHighlights } from './utils.js';
 import { isWeekView, isConverted } from './main.js';
 
 //updating the left side
@@ -59,6 +59,7 @@ function update_city(locationData) {
     }
 }
 
+//TODO:export later
 function render_weather_cards(count) {
     const container = document.getElementById("weather-cards-container");
     container.innerHTML = "";
@@ -86,6 +87,9 @@ function render_weather_cards(count) {
 }
 
 function update_right(data) {
+    const highlightsContainer = document.getElementById("highlights-container");
+    renderHighlights(highlightsContainer, data);
+
     const days = data.daily.time;
     const quart_mins = data.minutely_15.time.slice(0, 7);
     
@@ -100,24 +104,6 @@ function update_right(data) {
     let card_days = document.querySelectorAll(".card-day");
     let card_imgs = document.querySelectorAll(".card-img");
     let card_weathers = document.querySelectorAll(".card-weather");
-    let highlights_names = document.querySelectorAll(".highlight-name");
-    let highlights_values = document.querySelectorAll(".highlight-value");
-    
-    // Highlights
-    highlights_names[0].innerHTML = "Sunrise&#47;Sunset";
-    highlights_values[0].innerHTML = `${data.daily.sunrise[0].slice(-5)}<br>${data.daily.sunset[0].slice(-5)}`;
-    highlights_names[1].innerHTML = "UV Index";
-    highlights_values[1].innerHTML = `${data.daily.uv_index_max[0]}`;
-    highlights_names[2].innerHTML = "Humidity";
-    highlights_values[2].innerHTML = `${data.current.relative_humidity_2m}&#37;`;
-    highlights_names[3].innerHTML = "Precipitation";
-    highlights_values[3].innerHTML = `${data.daily.precipitation_probability_max[0]}&#37;`;
-    highlights_names[4].innerHTML = "Rain Sum";
-    highlights_values[4].innerHTML = `${data.daily.rain_sum[0]} mm`;
-    highlights_names[5].innerHTML = "Snowfall Sum";
-    highlights_values[5].innerHTML = `${data.daily.snowfall_sum[0]} cm`;
-    highlights_names[6].innerHTML = "Wind Speed&#47;Wind Direction";
-    highlights_values[6].innerHTML = `${data.current.wind_speed_10m} km&#47;hr <br> ${data.current.wind_direction_10m}&deg;`;
     
     // Data extraction
     let quart_mins_temp = data.minutely_15.apparent_temperature.slice(0, 7);
