@@ -152,9 +152,9 @@ function update_right(data) {
             if (isConverted) {
                 const minF = (daily_min_temp[i] * 9) / 5 + 32;
                 const maxF = (daily_max_temp[i] * 9) / 5 + 32;
-                card_weathers[i].innerHTML = `${minF.toFixed(1)}°F, ${maxF.toFixed(1)}°F`;
+                card_weathers[i].innerHTML = `${minF.toFixed(1)}°F,<br> ${maxF.toFixed(1)}°F`;
             } else {
-                card_weathers[i].innerHTML = `${daily_min_temp[i].toFixed(1)}°C, ${daily_max_temp[i].toFixed(1)}°C`;
+                card_weathers[i].innerHTML = `${daily_min_temp[i].toFixed(1)}°C,<br> ${daily_max_temp[i].toFixed(1)}°C`;
             }
         }
     }

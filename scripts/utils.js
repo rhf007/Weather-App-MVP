@@ -61,7 +61,7 @@ const defaultImages = {
 function renderHighlights(containerElement, data) {
     const highlightData = [
         {
-            name: "Sunrise/Sunset",
+            name: "Sunrise<br>Sunset",
             value: `${data.daily.sunrise[0].slice(-5)}<br>${data.daily.sunset[0].slice(-5)}`
         },
         {
@@ -73,7 +73,7 @@ function renderHighlights(containerElement, data) {
             value: `${data.current.relative_humidity_2m}%`
         },
         {
-            name: "Precipitation",
+            name: "PCPN",
             value: `${data.daily.precipitation_probability_max[0]}%`
         },
         {
@@ -85,7 +85,7 @@ function renderHighlights(containerElement, data) {
             value: `${data.daily.snowfall_sum[0]} cm`
         },
         {
-            name: "Wind Speed/Wind Direction",
+            name: "Wind Speed<br>Wind Direction",
             value: `${data.current.wind_speed_10m} km/hr <br> ${data.current.wind_direction_10m}&deg;`
         }
     ];
